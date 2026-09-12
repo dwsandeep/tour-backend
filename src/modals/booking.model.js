@@ -48,6 +48,11 @@ const bookingSchema = new Schema(
       required: true,
       trim: true,
     },
+    cityId: {
+      type: Schema.Types.ObjectId,
+      ref: "City",
+      required: true,
+    },
     travelDate: {
       type: Date,
       required: true,

@@ -1,0 +1,1371 @@
+{
+  "info": {
+    "_postman_id": "468e1123-8446-4fc1-b962-60a7fed54500",
+    "name": "Tour Backend API Collection Copy",
+    "description": "Complete API collection for Tour Management System with Car, Booking, Package, Driver, and Service endpoints with city-wise filtering",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "17378259"
+  },
+  "item": [
+    {
+      "name": "Cities",
+      "item": [
+        {
+          "name": "Get All Cities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cities",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cities"
+              ]
+            },
+            "description": "Get all cities"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Cities",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cities/active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cities",
+                "active"
+              ]
+            },
+            "description": "Get all active cities"
+          },
+          "response": []
+        },
+        {
+          "name": "Get City by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cities/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cities",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "city_id_here",
+                  "description": "City ID"
+                }
+              ]
+            },
+            "description": "Get a specific city by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create City",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mumbai\",\n  \"slug\": \"mumbai\",\n  \"state\": \"Maharashtra\",\n  \"country\": \"India\",\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cities",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cities"
+              ]
+            },
+            "description": "Create a new city"
+          },
+          "response": []
+        },
+        {
+          "name": "Update City",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mumbai\",\n  \"slug\": \"mumbai\",\n  \"state\": \"Maharashtra\",\n  \"country\": \"India\",\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cities/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cities",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "city_id_here",
+                  "description": "City ID"
+                }
+              ]
+            },
+            "description": "Update city details"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete City",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cities/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cities",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "city_id_here",
+                  "description": "City ID"
+                }
+              ]
+            },
+            "description": "Delete a city by ID"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Cars",
+      "item": [
+        {
+          "name": "Get All Cars",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cars",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cars"
+              ]
+            },
+            "description": "Get all cars with optional cityId filter"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Cars by City",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cars?cityId=city_id_here",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cars"
+              ],
+              "query": [
+                {
+                  "key": "cityId",
+                  "value": "city_id_here",
+                  "description": "Filter cars by cityId"
+                }
+              ]
+            },
+            "description": "Get all cars filtered by city"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Cars",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cars/active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cars",
+                "active"
+              ]
+            },
+            "description": "Get all active cars"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Cars by City",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cars/active?cityId=city_id_here",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cars",
+                "active"
+              ],
+              "query": [
+                {
+                  "key": "cityId",
+                  "value": "city_id_here",
+                  "description": "Filter active cars by cityId"
+                }
+              ]
+            },
+            "description": "Get active cars filtered by city"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Car by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cars/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cars",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "car_id_here",
+                  "description": "Car ID"
+                }
+              ]
+            },
+            "description": "Get a specific car by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Car",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Toyota Innova\",\n  \"slug\": \"toyota-innova\",\n  \"category\": \"SUV\",\n  \"cityId\": \"city_id_here\",\n  \"driverId\": \"\",\n  \"seatingCapacity\": 7,\n  \"image\": \"https://example.com/car-image.jpg\",\n  \"description\": \"Spacious SUV for family trips\",\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cars",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cars"
+              ]
+            },
+            "description": "Create a new car (driverId is optional)"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Car",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Toyota Innova Updated\",\n  \"slug\": \"toyota-innova\",\n  \"category\": \"SUV\",\n  \"cityId\": \"city_id_here\",\n  \"driverId\": \"new_driver_id_here\",\n  \"seatingCapacity\": 7,\n  \"image\": \"https://example.com/car-image-updated.jpg\",\n  \"description\": \"Updated description\",\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/cars/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cars",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "car_id_here",
+                  "description": "Car ID"
+                }
+              ]
+            },
+            "description": "Update car details including driver assignment"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Car",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/cars/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "cars",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "car_id_here",
+                  "description": "Car ID"
+                }
+              ]
+            },
+            "description": "Delete a car by ID"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Packages",
+      "item": [
+        {
+          "name": "Get All Packages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/packages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "packages"
+              ]
+            },
+            "description": "Get all packages with optional cityId filter"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Packages by City",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/packages?cityId=city_id_here",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "packages"
+              ],
+              "query": [
+                {
+                  "key": "cityId",
+                  "value": "city_id_here",
+                  "description": "Filter packages by cityId"
+                }
+              ]
+            },
+            "description": "Get packages filtered by city"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Packages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/packages/active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "packages",
+                "active"
+              ]
+            },
+            "description": "Get all active packages"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Packages by City",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/packages/active?cityId=city_id_here",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "packages",
+                "active"
+              ],
+              "query": [
+                {
+                  "key": "cityId",
+                  "value": "city_id_here",
+                  "description": "Filter active packages by cityId"
+                }
+              ]
+            },
+            "description": "Get active packages filtered by city"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Featured Packages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/packages/featured",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "packages",
+                "featured"
+              ]
+            },
+            "description": "Get all featured packages"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Featured Packages by City",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/packages/featured?cityId=city_id_here",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "packages",
+                "featured"
+              ],
+              "query": [
+                {
+                  "key": "cityId",
+                  "value": "city_id_here",
+                  "description": "Filter featured packages by cityId"
+                }
+              ]
+            },
+            "description": "Get featured packages filtered by city"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Package by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/packages/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "packages",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "package_id_here",
+                  "description": "Package ID"
+                }
+              ]
+            },
+            "description": "Get a specific package by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Package",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mumbai City Tour\",\n  \"slug\": \"mumbai-city-tour\",\n  \"source\": \"Mumbai\",\n  \"destination\": \"Gateway of India\",\n  \"cityId\": \"city_id_here\",\n  \"tripType\": \"ONE_WAY\",\n  \"distanceKm\": 50,\n  \"estimatedDurationMinutes\": 180,\n  \"shortDescription\": \"Explore Mumbai's iconic landmarks\",\n  \"description\": \"A comprehensive tour of Mumbai's most famous attractions including Gateway of India, Marine Drive, and more.\",\n  \"image\": \"https://example.com/package-image.jpg\",\n  \"pricing\": [\n    {\n      \"carId\": \"car_id_here\",\n      \"price\": 5000\n    }\n  ],\n  \"inclusions\": [\"AC Vehicle\", \"Driver\", \"Fuel\", \"Toll Tax\"],\n  \"exclusions\": [\"Parking\", \"Entry Tickets\", \"Food\"],\n  \"isFeatured\": true,\n  \"isActive\": true,\n  \"displayOrder\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/packages",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "packages"
+              ]
+            },
+            "description": "Create a new tour package"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Package",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Mumbai City Tour Updated\",\n  \"slug\": \"mumbai-city-tour\",\n  \"source\": \"Mumbai\",\n  \"destination\": \"Gateway of India\",\n  \"cityId\": \"city_id_here\",\n  \"tripType\": \"ONE_WAY\",\n  \"distanceKm\": 50,\n  \"estimatedDurationMinutes\": 180,\n  \"shortDescription\": \"Updated description\",\n  \"description\": \"Updated comprehensive tour description\",\n  \"image\": \"https://example.com/package-image-updated.jpg\",\n  \"pricing\": [\n    {\n      \"carId\": \"car_id_here\",\n      \"price\": 5500\n    }\n  ],\n  \"inclusions\": [\"AC Vehicle\", \"Driver\", \"Fuel\", \"Toll Tax\", \"Water Bottles\"],\n  \"exclusions\": [\"Parking\", \"Entry Tickets\", \"Food\"],\n  \"isFeatured\": true,\n  \"isActive\": true,\n  \"displayOrder\": 1\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/packages/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "packages",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "package_id_here",
+                  "description": "Package ID"
+                }
+              ]
+            },
+            "description": "Update package details"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Package",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/packages/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "packages",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "package_id_here",
+                  "description": "Package ID"
+                }
+              ]
+            },
+            "description": "Delete a package by ID"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Services",
+      "item": [
+        {
+          "name": "Get All Services",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/services",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "services"
+              ]
+            },
+            "description": "Get all services with optional cityId filter"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Services by City",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/services?cityId=city_id_here",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "services"
+              ],
+              "query": [
+                {
+                  "key": "cityId",
+                  "value": "city_id_here",
+                  "description": "Filter services by cityId"
+                }
+              ]
+            },
+            "description": "Get services filtered by city"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Services",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/services/active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "services",
+                "active"
+              ]
+            },
+            "description": "Get all active services"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Services by City",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/services/active?cityId=city_id_here",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "services",
+                "active"
+              ],
+              "query": [
+                {
+                  "key": "cityId",
+                  "value": "city_id_here",
+                  "description": "Filter active services by cityId"
+                }
+              ]
+            },
+            "description": "Get active services filtered by city"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Service by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/services/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "services",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "service_id_here",
+                  "description": "Service ID"
+                }
+              ]
+            },
+            "description": "Get a specific service by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Service",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Airport Transfer\",\n  \"slug\": \"airport-transfer\",\n  \"cityId\": \"city_id_here\",\n  \"shortDescription\": \"Comfortable airport pickup and drop service\",\n  \"description\": \"Professional airport transfer service with experienced drivers. Available 24/7 for your convenience.\",\n  \"pricingType\": \"FIXED\",\n  \"price\": 1500,\n  \"image\": \"https://example.com/service-image.jpg\",\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/services",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "services"
+              ]
+            },
+            "description": "Create a new service"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Service",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Airport Transfer Updated\",\n  \"slug\": \"airport-transfer\",\n  \"cityId\": \"city_id_here\",\n  \"shortDescription\": \"Updated description\",\n  \"description\": \"Updated professional airport transfer service description\",\n  \"pricingType\": \"FIXED\",\n  \"price\": 1800,\n  \"image\": \"https://example.com/service-image-updated.jpg\",\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/services/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "services",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "service_id_here",
+                  "description": "Service ID"
+                }
+              ]
+            },
+            "description": "Update service details"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Service",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/services/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "services",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "service_id_here",
+                  "description": "Service ID"
+                }
+              ]
+            },
+            "description": "Delete a service by ID"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Drivers",
+      "item": [
+        {
+          "name": "Get All Drivers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
+            },
+            "description": "Get all drivers with optional cityId filter"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Drivers by City",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers?cityId=city_id_here",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ],
+              "query": [
+                {
+                  "key": "cityId",
+                  "value": "city_id_here",
+                  "description": "Filter drivers by cityId"
+                }
+              ]
+            },
+            "description": "Get drivers filtered by city"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Drivers",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers/active",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "active"
+              ]
+            },
+            "description": "Get all active drivers"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Active Drivers by City",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers/active?cityId=city_id_here",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                "active"
+              ],
+              "query": [
+                {
+                  "key": "cityId",
+                  "value": "city_id_here",
+                  "description": "Filter active drivers by cityId"
+                }
+              ]
+            },
+            "description": "Get active drivers filtered by city"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Driver by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "driver_id_here",
+                  "description": "Driver ID"
+                }
+              ]
+            },
+            "description": "Get a specific driver by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Driver",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Rajesh Kumar\",\n  \"phone\": \"+919876543210\",\n  \"email\": \"rajesh.kumar@example.com\",\n  \"licenseNumber\": \"MH1234567890123\",\n  \"licenseExpiryDate\": \"2025-12-31\",\n  \"address\": \"123, Andheri East, Mumbai\",\n  \"cityId\": \"city_id_here\",\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers"
+              ]
+            },
+            "description": "Create a new driver"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Driver",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Rajesh Kumar Updated\",\n  \"phone\": \"+919876543211\",\n  \"email\": \"rajesh.kumar.updated@example.com\",\n  \"licenseNumber\": \"MH1234567890123\",\n  \"licenseExpiryDate\": \"2026-12-31\",\n  \"address\": \"456, Andheri West, Mumbai\",\n  \"cityId\": \"city_id_here\",\n  \"isActive\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "driver_id_here",
+                  "description": "Driver ID"
+                }
+              ]
+            },
+            "description": "Update driver details"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Driver",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/drivers/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "drivers",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "driver_id_here",
+                  "description": "Driver ID"
+                }
+              ]
+            },
+            "description": "Delete a driver by ID"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Get All Bookings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bookings"
+              ]
+            },
+            "description": "Get all bookings with optional filters"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Bookings by City",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings?cityId=city_id_here",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bookings"
+              ],
+              "query": [
+                {
+                  "key": "cityId",
+                  "value": "city_id_here",
+                  "description": "Filter bookings by cityId"
+                }
+              ]
+            },
+            "description": "Get bookings filtered by city"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Bookings by Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings?status=PENDING",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bookings"
+              ],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PENDING",
+                  "description": "Filter by status: PENDING, CONFIRMED, REJECTED, CANCELLED, COMPLETED"
+                }
+              ]
+            },
+            "description": "Get bookings filtered by status"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Bookings by Type",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings?bookingType=PACKAGE",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bookings"
+              ],
+              "query": [
+                {
+                  "key": "bookingType",
+                  "value": "PACKAGE",
+                  "description": "Filter by booking type: PACKAGE or SERVICE"
+                }
+              ]
+            },
+            "description": "Get bookings filtered by type"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Booking by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bookings",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "booking_id_here",
+                  "description": "Booking ID"
+                }
+              ]
+            },
+            "description": "Get a specific booking by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Package Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingType\": \"PACKAGE\",\n  \"packageId\": \"package_id_here\",\n  \"carId\": \"car_id_here\",\n  \"customer\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"+919876543210\",\n    \"email\": \"john.doe@example.com\"\n  },\n  \"pickupLocation\": \"Andheri East, Mumbai\",\n  \"dropLocation\": \"Gateway of India, Mumbai\",\n  \"cityId\": \"city_id_here\",\n  \"travelDate\": \"2024-12-25\",\n  \"travelTime\": \"09:00\",\n  \"passengers\": 4,\n  \"distanceKm\": 50,\n  \"ratePerKm\": 20,\n  \"baseAmount\": 5000,\n  \"totalAmount\": 5500,\n  \"pricingSnapshot\": {\n    \"packagePrice\": 5000,\n    \"additionalCharges\": 500\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bookings"
+              ]
+            },
+            "description": "Create a new package booking"
+          },
+          "response": []
+        },
+        {
+          "name": "Create Service Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingType\": \"SERVICE\",\n  \"serviceId\": \"service_id_here\",\n  \"carId\": \"car_id_here\",\n  \"customer\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"+919876543210\",\n    \"email\": \"john.doe@example.com\"\n  },\n  \"pickupLocation\": \"Andheri East, Mumbai\",\n  \"dropLocation\": \"Chhatrapati Shivaji Airport, Mumbai\",\n  \"cityId\": \"city_id_here\",\n  \"travelDate\": \"2024-12-25\",\n  \"travelTime\": \"06:00\",\n  \"passengers\": 2,\n  \"distanceKm\": 15,\n  \"ratePerKm\": 25,\n  \"baseAmount\": 1500,\n  \"totalAmount\": 1875,\n  \"pricingSnapshot\": {\n    \"servicePrice\": 1500,\n    \"additionalCharges\": 375\n  }\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bookings"
+              ]
+            },
+            "description": "Create a new service booking"
+          },
+          "response": []
+        },
+        {
+          "name": "Update Booking Status",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"CONFIRMED\",\n  \"adminNote\": \"Booking confirmed via phone call\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bookings",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "booking_id_here",
+                  "description": "Booking ID"
+                }
+              ]
+            },
+            "description": "Update booking status (PENDING, CONFIRMED, REJECTED, CANCELLED, COMPLETED)"
+          },
+          "response": []
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"otpVerified\": true\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings/:id/verify-otp",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bookings",
+                ":id",
+                "verify-otp"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "booking_id_here",
+                  "description": "Booking ID"
+                }
+              ]
+            },
+            "description": "Verify OTP for booking"
+          },
+          "response": []
+        },
+        {
+          "name": "Delete Booking",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/bookings/:id",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "api",
+                "bookings",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "booking_id_here",
+                  "description": "Booking ID"
+                }
+              ]
+            },
+            "description": "Delete a booking by ID"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8001"
+    }
+  ]
+}

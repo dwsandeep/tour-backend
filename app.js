@@ -24,6 +24,8 @@ import serviceRouter from './src/routes/service.routes.js';
 import carRouter from './src/routes/car.routes.js';
 import packageRouter from './src/routes/package.routes.js';
 import bookingRouter from './src/routes/booking.routes.js';
+import driverRouter from './src/routes/driver.routes.js';
+import cityRouter from './src/routes/city.routes.js';
 //declare route
 app.use('/users', userRouter)
 app.use('/subscription', subscriptionRouter)
@@ -32,6 +34,8 @@ app.use('/api/services', serviceRouter)
 app.use('/api/cars', carRouter)
 app.use('/api/packages', packageRouter)
 app.use('/api/bookings', bookingRouter)
+app.use('/api/drivers', driverRouter)
+app.use('/api/cities', cityRouter)
 app.use(errorHandler)
 export {app}
 

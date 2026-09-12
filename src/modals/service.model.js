@@ -14,6 +14,11 @@ const serviceSchema = new Schema(
       lowercase: true,
       trim: true,
     },
+    cityId: {
+      type: Schema.Types.ObjectId,
+      ref: "City",
+      required: true,
+    },
     shortDescription: {
       type: String,
       trim: true,
