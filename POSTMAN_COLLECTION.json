@@ -1,0 +1,533 @@
+{
+  "info": {
+    "name": "Tour & Travels API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Services",
+      "item": [
+        {
+          "name": "Create Service",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Airport Transfer\",\n  \"slug\": \"airport-transfer\",\n  \"shortDescription\": \"Quick airport pickup and drop service\",\n  \"description\": \"Professional airport transfer service with experienced drivers. We monitor flight delays and ensure timely pickup.\",\n  \"pricingType\": \"FIXED\",\n  \"price\": 1500,\n  \"image\": \"https://example.com/airport-transfer.jpg\",\n  \"isActive\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/services",
+              "host": ["{{baseUrl}}"],
+              "path": ["services"]
+            }
+          }
+        },
+        {
+          "name": "Get All Services",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/services",
+              "host": ["{{baseUrl}}"],
+              "path": ["services"]
+            }
+          }
+        },
+        {
+          "name": "Get Active Services",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/services/active",
+              "host": ["{{baseUrl}}"],
+              "path": ["services", "active"]
+            }
+          }
+        },
+        {
+          "name": "Get Service by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/services/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["services", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "SERVICE_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Service",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Airport Transfer Updated\",\n  \"price\": 1800,\n  \"isActive\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/services/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["services", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "SERVICE_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Service",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/services/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["services", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "SERVICE_ID_HERE"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Cars",
+      "item": [
+        {
+          "name": "Create Car",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Toyota Innova\",\n  \"slug\": \"toyota-innova\",\n  \"category\": \"SUV\",\n  \"seatingCapacity\": 7,\n  \"image\": \"https://example.com/innova.jpg\",\n  \"description\": \"Spacious SUV perfect for family trips and group travel.\",\n  \"isActive\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cars",
+              "host": ["{{baseUrl}}"],
+              "path": ["cars"]
+            }
+          }
+        },
+        {
+          "name": "Get All Cars",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cars",
+              "host": ["{{baseUrl}}"],
+              "path": ["cars"]
+            }
+          }
+        },
+        {
+          "name": "Get Active Cars",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cars/active",
+              "host": ["{{baseUrl}}"],
+              "path": ["cars", "active"]
+            }
+          }
+        },
+        {
+          "name": "Get Car by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cars/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["cars", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "CAR_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Car",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Toyota Innova Crysta\",\n  \"isActive\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/cars/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["cars", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "CAR_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Car",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/cars/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["cars", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "CAR_ID_HERE"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Packages",
+      "item": [
+        {
+          "name": "Create Package",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Delhi to Agra Tour\",\n  \"slug\": \"delhi-to-agra-tour\",\n  \"source\": \"Delhi\",\n  \"destination\": \"Agra\",\n  \"tripType\": \"ROUND_TRIP\",\n  \"distanceKm\": 230,\n  \"estimatedDurationMinutes\": 300,\n  \"shortDescription\": \"Same day return trip to Taj Mahal\",\n  \"description\": \"Experience the beauty of Taj Mahal with our same day return trip package. Includes comfortable travel and experienced driver.\",\n  \"image\": \"https://example.com/taj-mahal.jpg\",\n  \"pricing\": [\n    {\n      \"carId\": \"CAR_ID_HERE\",\n      \"price\": 4500\n    }\n  ],\n  \"inclusions\": [\n    \"Air-conditioned car\",\n    \"Experienced driver\",\n    \"Fuel charges\",\n    \"Driver allowance\"\n  ],\n  \"exclusions\": [\n    \"Monument tickets\",\n    \"Guide charges\",\n    \"Parking charges\"\n  ],\n  \"isFeatured\": true,\n  \"isActive\": true,\n  \"displayOrder\": 1\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/packages",
+              "host": ["{{baseUrl}}"],
+              "path": ["packages"]
+            }
+          }
+        },
+        {
+          "name": "Get All Packages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/packages",
+              "host": ["{{baseUrl}}"],
+              "path": ["packages"]
+            }
+          }
+        },
+        {
+          "name": "Get Active Packages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/packages/active",
+              "host": ["{{baseUrl}}"],
+              "path": ["packages", "active"]
+            }
+          }
+        },
+        {
+          "name": "Get Featured Packages",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/packages/featured",
+              "host": ["{{baseUrl}}"],
+              "path": ["packages", "featured"]
+            }
+          }
+        },
+        {
+          "name": "Get Package by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/packages/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["packages", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "PACKAGE_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Package",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Delhi to Agra Tour - Premium\",\n  \"isFeatured\": true,\n  \"isActive\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/packages/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["packages", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "PACKAGE_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Package",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/packages/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["packages", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "PACKAGE_ID_HERE"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Create Package Booking",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingType\": \"PACKAGE\",\n  \"packageId\": \"PACKAGE_ID_HERE\",\n  \"carId\": \"CAR_ID_HERE\",\n  \"customer\": {\n    \"name\": \"John Doe\",\n    \"phone\": \"+919876543210\",\n    \"email\": \"john@example.com\"\n  },\n  \"pickupLocation\": \"Connaught Place, Delhi\",\n  \"dropLocation\": \"Taj Mahal, Agra\",\n  \"travelDate\": \"2026-09-15T06:00:00.000Z\",\n  \"travelTime\": \"06:00 AM\",\n  \"passengers\": 4,\n  \"distanceKm\": 230,\n  \"baseAmount\": 4500,\n  \"totalAmount\": 4500,\n  \"pricingSnapshot\": {\n    \"packagePrice\": 4500\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/bookings",
+              "host": ["{{baseUrl}}"],
+              "path": ["bookings"]
+            }
+          }
+        },
+        {
+          "name": "Create Service Booking",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingType\": \"SERVICE\",\n  \"serviceId\": \"SERVICE_ID_HERE\",\n  \"carId\": \"CAR_ID_HERE\",\n  \"customer\": {\n    \"name\": \"Jane Smith\",\n    \"phone\": \"+919876543211\",\n    \"email\": \"jane@example.com\"\n  },\n  \"pickupLocation\": \"IGI Airport Terminal 3\",\n  \"dropLocation\": \"Connaught Place, Delhi\",\n  \"travelDate\": \"2026-09-15T14:00:00.000Z\",\n  \"travelTime\": \"02:00 PM\",\n  \"passengers\": 2,\n  \"distanceKm\": 15,\n  \"ratePerKm\": 20,\n  \"baseAmount\": 300,\n  \"totalAmount\": 300,\n  \"pricingSnapshot\": {\n    \"servicePrice\": 1500,\n    \"ratePerKm\": 20\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/bookings",
+              "host": ["{{baseUrl}}"],
+              "path": ["bookings"]
+            }
+          }
+        },
+        {
+          "name": "Get All Bookings",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/bookings",
+              "host": ["{{baseUrl}}"],
+              "path": ["bookings"]
+            }
+          }
+        },
+        {
+          "name": "Get Bookings by Status",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/bookings?status=PENDING",
+              "host": ["{{baseUrl}}"],
+              "path": ["bookings"],
+              "query": [
+                {
+                  "key": "status",
+                  "value": "PENDING"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Booking by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["bookings", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "BOOKING_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Update Booking Status",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"CONFIRMED\",\n  \"adminNote\": \"Booking confirmed via phone call\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/bookings/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["bookings", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "BOOKING_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Verify OTP",
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"otpVerified\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/bookings/:id/verify-otp",
+              "host": ["{{baseUrl}}"],
+              "path": ["bookings", ":id", "verify-otp"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "BOOKING_ID_HERE"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "Delete Booking",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/bookings/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["bookings", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "BOOKING_ID_HERE"
+                }
+              ]
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api",
+      "type": "string"
+    }
+  ]
+}
