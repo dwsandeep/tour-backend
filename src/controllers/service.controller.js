@@ -1,11 +1,17 @@
 import { Service } from "../modals/service.model.js";
+import { City } from "../modals/city.model.js";
 
 const createService = async (req, res) => {
   try {
-    const { name, slug, shortDescription, description, pricingType, price, image, isActive } = req.body;
+    const { name, slug, cityId, shortDescription, description, pricingType, price, image, isActive } = req.body;
 
-    if (!name || !slug || !pricingType || price === undefined) {
-      return res.status(400).json({ message: "Name, slug, pricingType, and price are required" });
+    if (!name || !slug || !cityId || !pricingType || price === undefined) {
+      return res.status(400).json({ message: "Name, slug, cityId, pricingType, and price are required" });
+    }
+
+    const city = await City.findById(cityId);
+    if (!city) {
+      return res.status(404).json({ message: "City not found" });
     }
 
     const existingService = await Service.findOne({ slug });
@@ -16,6 +22,7 @@ const createService = async (req, res) => {
     const service = await Service.create({
       name,
       slug,
+      cityId,
       shortDescription,
       description,
       pricingType,
@@ -32,7 +39,14 @@ const createService = async (req, res) => {
 
 const getAllServices = async (req, res) => {
   try {
-    const services = await Service.find({}).sort({ createdAt: -1 });
+    const { cityId } = req.query;
+    const filter = {};
+
+    if (cityId) {
+      filter.cityId = cityId;
+    }
+
+    const services = await Service.find(filter).populate("cityId").sort({ createdAt: -1 });
     return res.status(200).json({ message: "Services fetched successfully", data: services });
   } catch (error) {
     return res.status(500).json({ message: "Error fetching services", error: error.message });
@@ -42,7 +56,7 @@ const getAllServices = async (req, res) => {
 const getServiceById = async (req, res) => {
   try {
     const { id } = req.params;
-    const service = await Service.findById(id);
+    const service = await Service.findById(id).populate("cityId");
 
     if (!service) {
       return res.status(404).json({ message: "Service not found" });
@@ -57,11 +71,18 @@ const getServiceById = async (req, res) => {
 const updateService = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, slug, shortDescription, description, pricingType, price, image, isActive } = req.body;
+    const { name, slug, cityId, shortDescription, description, pricingType, price, image, isActive } = req.body;
 
     const service = await Service.findById(id);
     if (!service) {
       return res.status(404).json({ message: "Service not found" });
+    }
+
+    if (cityId) {
+      const city = await City.findById(cityId);
+      if (!city) {
+        return res.status(404).json({ message: "City not found" });
+      }
     }
 
     if (slug && slug !== service.slug) {
@@ -73,6 +94,7 @@ const updateService = async (req, res) => {
 
     service.name = name || service.name;
     service.slug = slug || service.slug;
+    service.cityId = cityId !== undefined ? cityId : service.cityId;
     service.shortDescription = shortDescription !== undefined ? shortDescription : service.shortDescription;
     service.description = description !== undefined ? description : service.description;
     service.pricingType = pricingType || service.pricingType;
@@ -105,7 +127,14 @@ const deleteService = async (req, res) => {
 
 const getActiveServices = async (req, res) => {
   try {
-    const services = await Service.find({ isActive: true }).sort({ createdAt: -1 });
+    const { cityId } = req.query;
+    const filter = { isActive: true };
+
+    if (cityId) {
+      filter.cityId = cityId;
+    }
+
+    const services = await Service.find(filter).populate("cityId").sort({ createdAt: -1 });
     return res.status(200).json({ message: "Active services fetched successfully", data: services });
   } catch (error) {
     return res.status(500).json({ message: "Error fetching active services", error: error.message });

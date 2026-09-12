@@ -2,6 +2,7 @@ import { Booking } from "../modals/booking.model.js";
 import { Package } from "../modals/package.model.js";
 import { Service } from "../modals/service.model.js";
 import { Car } from "../modals/car.model.js";
+import { City } from "../modals/city.model.js";
 
 const createBooking = async (req, res) => {
   try {
@@ -13,6 +14,7 @@ const createBooking = async (req, res) => {
       customer,
       pickupLocation,
       dropLocation,
+      cityId,
       travelDate,
       travelTime,
       passengers,
@@ -23,8 +25,13 @@ const createBooking = async (req, res) => {
       pricingSnapshot,
     } = req.body;
 
-    if (!bookingType || !carId || !customer || !pickupLocation || !dropLocation || !travelDate || !passengers || baseAmount === undefined || totalAmount === undefined || !pricingSnapshot) {
+    if (!bookingType || !carId || !customer || !pickupLocation || !dropLocation || !cityId || !travelDate || !passengers || baseAmount === undefined || totalAmount === undefined || !pricingSnapshot) {
       return res.status(400).json({ message: "Missing required fields" });
+    }
+
+    const city = await City.findById(cityId);
+    if (!city) {
+      return res.status(404).json({ message: "City not found" });
     }
 
     if (!customer.name || !customer.phone || !customer.email) {
@@ -89,6 +96,7 @@ const createBooking = async (req, res) => {
       customer,
       pickupLocation,
       dropLocation,
+      cityId,
       travelDate,
       travelTime,
       passengers,
@@ -104,7 +112,8 @@ const createBooking = async (req, res) => {
     const populatedBooking = await Booking.findById(booking._id)
       .populate("packageId")
       .populate("serviceId")
-      .populate("carId");
+      .populate("carId")
+      .populate("cityId");
 
     return res.status(201).json({ message: "Booking created successfully", data: populatedBooking });
   } catch (error) {
@@ -114,7 +123,7 @@ const createBooking = async (req, res) => {
 
 const getAllBookings = async (req, res) => {
   try {
-    const { status, bookingType } = req.query;
+    const { status, bookingType, cityId } = req.query;
     const filter = {};
 
     if (status) {
@@ -125,10 +134,15 @@ const getAllBookings = async (req, res) => {
       filter.bookingType = bookingType;
     }
 
+    if (cityId) {
+      filter.cityId = cityId;
+    }
+
     const bookings = await Booking.find(filter)
       .populate("packageId")
       .populate("serviceId")
       .populate("carId")
+      .populate("cityId")
       .sort({ createdAt: -1 });
 
     return res.status(200).json({ message: "Bookings fetched successfully", data: bookings });
@@ -143,7 +157,8 @@ const getBookingById = async (req, res) => {
     const booking = await Booking.findById(id)
       .populate("packageId")
       .populate("serviceId")
-      .populate("carId");
+      .populate("carId")
+      .populate("cityId");
 
     if (!booking) {
       return res.status(404).json({ message: "Booking not found" });
@@ -179,7 +194,8 @@ const updateBookingStatus = async (req, res) => {
     const populatedBooking = await Booking.findById(booking._id)
       .populate("packageId")
       .populate("serviceId")
-      .populate("carId");
+      .populate("carId")
+      .populate("cityId");
 
     return res.status(200).json({ message: "Booking status updated successfully", data: populatedBooking });
   } catch (error) {
@@ -203,7 +219,8 @@ const verifyOtp = async (req, res) => {
     const populatedBooking = await Booking.findById(booking._id)
       .populate("packageId")
       .populate("serviceId")
-      .populate("carId");
+      .populate("carId")
+      .populate("cityId");
 
     return res.status(200).json({ message: "OTP verification updated successfully", data: populatedBooking });
   } catch (error) {

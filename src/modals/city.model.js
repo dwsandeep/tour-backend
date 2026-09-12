@@ -1,6 +1,6 @@
 import mongoose, { Schema } from "mongoose";
 
-const carSchema = new Schema(
+const citySchema = new Schema(
   {
     name: {
       type: String,
@@ -14,28 +14,14 @@ const carSchema = new Schema(
       lowercase: true,
       trim: true,
     },
-    category: {
+    state: {
       type: String,
+      required: true,
       trim: true,
     },
-    cityId: {
-      type: Schema.Types.ObjectId,
-      ref: "City",
-      required: true,
-    },
-    driverId: {
-      type: Schema.Types.ObjectId,
-      ref: "Driver",
-    },
-    seatingCapacity: {
-      type: Number,
-      required: true,
-    },
-    image: {
+    country: {
       type: String,
-    },
-    description: {
-      type: String,
+      required: true,
       trim: true,
     },
     isActive: {
@@ -49,4 +35,4 @@ const carSchema = new Schema(
   }
 );
 
-export const Car = mongoose.model("Car", carSchema);
+export const City = mongoose.model("City", citySchema);

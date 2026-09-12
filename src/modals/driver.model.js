@@ -1,20 +1,32 @@
 import mongoose, { Schema } from "mongoose";
 
-const carSchema = new Schema(
+const driverSchema = new Schema(
   {
     name: {
       type: String,
       required: true,
       trim: true,
     },
-    slug: {
+    phone: {
       type: String,
       required: true,
-      unique: true,
-      lowercase: true,
       trim: true,
     },
-    category: {
+    email: {
+      type: String,
+      trim: true,
+      lowercase: true,
+    },
+    licenseNumber: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    licenseExpiryDate: {
+      type: Date,
+      required: true,
+    },
+    address: {
       type: String,
       trim: true,
     },
@@ -22,21 +34,6 @@ const carSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "City",
       required: true,
-    },
-    driverId: {
-      type: Schema.Types.ObjectId,
-      ref: "Driver",
-    },
-    seatingCapacity: {
-      type: Number,
-      required: true,
-    },
-    image: {
-      type: String,
-    },
-    description: {
-      type: String,
-      trim: true,
     },
     isActive: {
       type: Boolean,
@@ -49,4 +46,4 @@ const carSchema = new Schema(
   }
 );
 
-export const Car = mongoose.model("Car", carSchema);
+export const Driver = mongoose.model("Driver", driverSchema);

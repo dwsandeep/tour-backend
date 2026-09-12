@@ -1,4 +1,5 @@
 import { Package } from "../modals/package.model.js";
+import { City } from "../modals/city.model.js";
 
 const createPackage = async (req, res) => {
   try {
@@ -7,6 +8,7 @@ const createPackage = async (req, res) => {
       slug,
       source,
       destination,
+      cityId,
       tripType,
       distanceKm,
       estimatedDurationMinutes,
@@ -21,8 +23,13 @@ const createPackage = async (req, res) => {
       displayOrder,
     } = req.body;
 
-    if (!name || !slug || !source || !destination || !tripType || !pricing || !Array.isArray(pricing) || pricing.length === 0) {
-      return res.status(400).json({ message: "Name, slug, source, destination, tripType, and pricing are required" });
+    if (!name || !slug || !source || !destination || !cityId || !tripType || !pricing || !Array.isArray(pricing) || pricing.length === 0) {
+      return res.status(400).json({ message: "Name, slug, source, destination, cityId, tripType, and pricing are required" });
+    }
+
+    const city = await City.findById(cityId);
+    if (!city) {
+      return res.status(404).json({ message: "City not found" });
     }
 
     const existingPackage = await Package.findOne({ slug });
@@ -35,6 +42,7 @@ const createPackage = async (req, res) => {
       slug,
       source,
       destination,
+      cityId,
       tripType,
       distanceKm,
       estimatedDurationMinutes,
@@ -49,7 +57,7 @@ const createPackage = async (req, res) => {
       displayOrder: displayOrder !== undefined ? displayOrder : 0,
     });
 
-    const populatedPackage = await Package.findById(tourPackage._id).populate("pricing.carId");
+    const populatedPackage = await Package.findById(tourPackage._id).populate("pricing.carId").populate("cityId");
 
     return res.status(201).json({ message: "Package created successfully", data: populatedPackage });
   } catch (error) {
@@ -59,7 +67,14 @@ const createPackage = async (req, res) => {
 
 const getAllPackages = async (req, res) => {
   try {
-    const packages = await Package.find({}).populate("pricing.carId").sort({ displayOrder: 1, createdAt: -1 });
+    const { cityId } = req.query;
+    const filter = {};
+
+    if (cityId) {
+      filter.cityId = cityId;
+    }
+
+    const packages = await Package.find(filter).populate("pricing.carId").populate("cityId").sort({ displayOrder: 1, createdAt: -1 });
     return res.status(200).json({ message: "Packages fetched successfully", data: packages });
   } catch (error) {
     return res.status(500).json({ message: "Error fetching packages", error: error.message });
@@ -69,7 +84,7 @@ const getAllPackages = async (req, res) => {
 const getPackageById = async (req, res) => {
   try {
     const { id } = req.params;
-    const tourPackage = await Package.findById(id).populate("pricing.carId");
+    const tourPackage = await Package.findById(id).populate("pricing.carId").populate("cityId");
 
     if (!tourPackage) {
       return res.status(404).json({ message: "Package not found" });
@@ -89,6 +104,7 @@ const updatePackage = async (req, res) => {
       slug,
       source,
       destination,
+      cityId,
       tripType,
       distanceKm,
       estimatedDurationMinutes,
@@ -108,6 +124,13 @@ const updatePackage = async (req, res) => {
       return res.status(404).json({ message: "Package not found" });
     }
 
+    if (cityId) {
+      const city = await City.findById(cityId);
+      if (!city) {
+        return res.status(404).json({ message: "City not found" });
+      }
+    }
+
     if (slug && slug !== tourPackage.slug) {
       const existingPackage = await Package.findOne({ slug });
       if (existingPackage) {
@@ -119,6 +142,7 @@ const updatePackage = async (req, res) => {
     tourPackage.slug = slug || tourPackage.slug;
     tourPackage.source = source || tourPackage.source;
     tourPackage.destination = destination || tourPackage.destination;
+    tourPackage.cityId = cityId !== undefined ? cityId : tourPackage.cityId;
     tourPackage.tripType = tripType || tourPackage.tripType;
     tourPackage.distanceKm = distanceKm !== undefined ? distanceKm : tourPackage.distanceKm;
     tourPackage.estimatedDurationMinutes = estimatedDurationMinutes !== undefined ? estimatedDurationMinutes : tourPackage.estimatedDurationMinutes;
@@ -134,7 +158,7 @@ const updatePackage = async (req, res) => {
 
     await tourPackage.save();
 
-    const populatedPackage = await Package.findById(tourPackage._id).populate("pricing.carId");
+    const populatedPackage = await Package.findById(tourPackage._id).populate("pricing.carId").populate("cityId");
 
     return res.status(200).json({ message: "Package updated successfully", data: populatedPackage });
   } catch (error) {
@@ -159,7 +183,14 @@ const deletePackage = async (req, res) => {
 
 const getActivePackages = async (req, res) => {
   try {
-    const packages = await Package.find({ isActive: true }).populate("pricing.carId").sort({ displayOrder: 1, createdAt: -1 });
+    const { cityId } = req.query;
+    const filter = { isActive: true };
+
+    if (cityId) {
+      filter.cityId = cityId;
+    }
+
+    const packages = await Package.find(filter).populate("pricing.carId").populate("cityId").sort({ displayOrder: 1, createdAt: -1 });
     return res.status(200).json({ message: "Active packages fetched successfully", data: packages });
   } catch (error) {
     return res.status(500).json({ message: "Error fetching active packages", error: error.message });
@@ -168,7 +199,14 @@ const getActivePackages = async (req, res) => {
 
 const getFeaturedPackages = async (req, res) => {
   try {
-    const packages = await Package.find({ isActive: true, isFeatured: true }).populate("pricing.carId").sort({ displayOrder: 1, createdAt: -1 });
+    const { cityId } = req.query;
+    const filter = { isActive: true, isFeatured: true };
+
+    if (cityId) {
+      filter.cityId = cityId;
+    }
+
+    const packages = await Package.find(filter).populate("pricing.carId").populate("cityId").sort({ displayOrder: 1, createdAt: -1 });
     return res.status(200).json({ message: "Featured packages fetched successfully", data: packages });
   } catch (error) {
     return res.status(500).json({ message: "Error fetching featured packages", error: error.message });

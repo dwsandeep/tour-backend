@@ -24,6 +24,11 @@ const packageSchema = new Schema(
       required: true,
       trim: true,
     },
+    cityId: {
+      type: Schema.Types.ObjectId,
+      ref: "City",
+      required: true,
+    },
     tripType: {
       type: String,
       required: true,
