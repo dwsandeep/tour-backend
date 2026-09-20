@@ -24,6 +24,17 @@ const citySchema = new Schema(
       required: true,
       trim: true,
     },
+    subcities: [{
+      name: {
+        type: String,
+        required: true,
+        trim: true,
+      },
+      price: {
+        type: Number,
+        required: true,
+      },
+    }],
     isActive: {
       type: Boolean,
       required: true,

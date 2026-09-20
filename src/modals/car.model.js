@@ -14,6 +14,11 @@ const carSchema = new Schema(
       lowercase: true,
       trim: true,
     },
+    brandId: {
+      type: Schema.Types.ObjectId,
+      ref: "CarBrand",
+      required: true,
+    },
     category: {
       type: String,
       trim: true,
@@ -30,6 +35,21 @@ const carSchema = new Schema(
     seatingCapacity: {
       type: Number,
       required: true,
+    },
+    rcNumber: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    isCommercial: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+    carNumber: {
+      type: String,
+      required: true,
+      trim: true,
     },
     image: {
       type: String,
