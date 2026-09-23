@@ -112,7 +112,10 @@ const createBooking = async (req, res) => {
     const populatedBooking = await Booking.findById(booking._id)
       .populate("packageId")
       .populate("serviceId")
-      .populate("carId")
+      .populate({
+        path: "carId",
+        populate: { path: "brandId" }
+      })
       .populate("cityId");
 
     return res.status(201).json({ message: "Booking created successfully", data: populatedBooking });
@@ -141,7 +144,10 @@ const getAllBookings = async (req, res) => {
     const bookings = await Booking.find(filter)
       .populate("packageId")
       .populate("serviceId")
-      .populate("carId")
+      .populate({
+        path: "carId",
+        populate: { path: "brandId" }
+      })
       .populate("cityId")
       .sort({ createdAt: -1 });
 
@@ -157,7 +163,10 @@ const getBookingById = async (req, res) => {
     const booking = await Booking.findById(id)
       .populate("packageId")
       .populate("serviceId")
-      .populate("carId")
+      .populate({
+        path: "carId",
+        populate: { path: "brandId" }
+      })
       .populate("cityId");
 
     if (!booking) {
@@ -194,7 +203,10 @@ const updateBookingStatus = async (req, res) => {
     const populatedBooking = await Booking.findById(booking._id)
       .populate("packageId")
       .populate("serviceId")
-      .populate("carId")
+      .populate({
+        path: "carId",
+        populate: { path: "brandId" }
+      })
       .populate("cityId");
 
     return res.status(200).json({ message: "Booking status updated successfully", data: populatedBooking });
@@ -219,7 +231,10 @@ const verifyOtp = async (req, res) => {
     const populatedBooking = await Booking.findById(booking._id)
       .populate("packageId")
       .populate("serviceId")
-      .populate("carId")
+      .populate({
+        path: "carId",
+        populate: { path: "brandId" }
+      })
       .populate("cityId");
 
     return res.status(200).json({ message: "OTP verification updated successfully", data: populatedBooking });
