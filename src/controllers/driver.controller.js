@@ -5,13 +5,15 @@ const createDriver = async (req, res) => {
   try {
     const { name, phone, email, licenseNumber, licenseExpiryDate, address, cityId, isActive } = req.body;
 
-    if (!name || !phone || !licenseNumber || !licenseExpiryDate || !cityId) {
-      return res.status(400).json({ message: "Name, phone, licenseNumber, licenseExpiryDate, and cityId are required" });
+    if (!name || !phone || !address) {
+      return res.status(400).json({ message: "Name, phone, and address are required" });
     }
 
-    const city = await City.findById(cityId);
-    if (!city) {
-      return res.status(404).json({ message: "City not found" });
+    if (cityId) {
+      const city = await City.findById(cityId);
+      if (!city) {
+        return res.status(404).json({ message: "City not found" });
+      }
     }
 
     const driver = await Driver.create({
@@ -79,11 +81,11 @@ const updateDriver = async (req, res) => {
       }
     }
 
-    driver.name = name || driver.name;
-    driver.phone = phone || driver.phone;
+    driver.name = name !== undefined ? name : driver.name;
+    driver.phone = phone !== undefined ? phone : driver.phone;
     driver.email = email !== undefined ? email : driver.email;
-    driver.licenseNumber = licenseNumber || driver.licenseNumber;
-    driver.licenseExpiryDate = licenseExpiryDate || driver.licenseExpiryDate;
+    driver.licenseNumber = licenseNumber !== undefined ? licenseNumber : driver.licenseNumber;
+    driver.licenseExpiryDate = licenseExpiryDate !== undefined ? licenseExpiryDate : driver.licenseExpiryDate;
     driver.address = address !== undefined ? address : driver.address;
     driver.cityId = cityId !== undefined ? cityId : driver.cityId;
     driver.isActive = isActive !== undefined ? isActive : driver.isActive;
@@ -127,6 +129,32 @@ const getActiveDrivers = async (req, res) => {
   }
 };
 
+const updateDriverStatus = async (req, res) => {
+  try {
+    const { driverIds, isActive } = req.body;
+
+    if (!driverIds || !Array.isArray(driverIds) || driverIds.length === 0) {
+      return res.status(400).json({ message: "driverIds array is required" });
+    }
+
+    if (isActive === undefined) {
+      return res.status(400).json({ message: "isActive is required" });
+    }
+
+    const result = await Driver.updateMany(
+      { _id: { $in: driverIds } },
+      { isActive }
+    );
+
+    return res.status(200).json({ 
+      message: "Driver status updated successfully", 
+      data: { modifiedCount: result.modifiedCount } 
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Error updating driver status", error: error.message });
+  }
+};
+
 export {
   createDriver,
   getAllDrivers,
@@ -134,4 +162,5 @@ export {
   updateDriver,
   deleteDriver,
   getActiveDrivers,
+  updateDriverStatus,
 };

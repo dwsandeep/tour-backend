@@ -19,21 +19,19 @@ const driverSchema = new Schema(
     },
     licenseNumber: {
       type: String,
-      required: true,
       trim: true,
     },
     licenseExpiryDate: {
       type: Date,
-      required: true,
     },
     address: {
       type: String,
+      required: true,
       trim: true,
     },
     cityId: {
       type: Schema.Types.ObjectId,
       ref: "City",
-      required: true,
     },
     isActive: {
       type: Boolean,
